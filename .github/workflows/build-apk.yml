@@ -1,12 +1,9 @@
-name: Loadout — Unpack, Build, Release and Update Description
+name: Loadout - Import, Build and Release APK
 
 on:
   push:
-    paths:
-      - 'Loadout-GitHub-Build.zip'
-      - 'payload/**'
-      - 'BUILD_PLAN.json'
-      - 'scripts/build.mjs'
+    branches:
+      - '**'
   workflow_dispatch:
 
 permissions:
@@ -18,152 +15,273 @@ concurrency:
 
 jobs:
   build-release:
-    name: Unpack source bundle and build Android APK
+    name: Import Loadout bundle and build Android APK
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           persist-credentials: true
 
+      - name: Detect uploaded bundle or prepared source
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ZIP_PATH="$(find . -type f -name 'Loadout-GitHub-Build.zip' -not -path './.git/*' -print -quit || true)"
+
+          if [ -n "$ZIP_PATH" ]; then
+            echo "mode=import" >> "$GITHUB_OUTPUT"
+            echo "upload_path=${ZIP_PATH#./}" >> "$GITHUB_OUTPUT"
+            echo "Found Loadout bundle at: $ZIP_PATH"
+          elif [ -f scripts/build.mjs ] && [ -f BUILD_PLAN.json ] && [ -f payload/loadout-app-payload.zip ]; then
+            echo "mode=build" >> "$GITHUB_OUTPUT"
+            echo "No upload ZIP found; using the already-imported source."
+          else
+            echo "mode=skip" >> "$GITHUB_OUTPUT"
+            echo "No Loadout ZIP or prepared build source found. This is normal when the workflow is first installed."
+          fi
+
       - name: Set up Node.js
+        if: steps.detect.outputs.mode != 'skip'
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
       - name: Set up Java
+        if: steps.detect.outputs.mode != 'skip'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
 
+      # A generated debug key is cached by GitHub Actions. No key or API secret
+      # needs to be created by the repository owner.
+      - name: Restore persistent debug signing key from Actions cache
+        if: steps.detect.outputs.mode != 'skip'
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: loadout-android-debug-keystore-v1
+
+      - name: Create debug signing key on first build
+        if: steps.detect.outputs.mode != 'skip'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.android"
+          if [ ! -f "$HOME/.android/debug.keystore" ]; then
+            keytool -genkeypair -v -noprompt \
+              -keystore "$HOME/.android/debug.keystore" \
+              -storepass android \
+              -keypass android \
+              -alias androiddebugkey \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -dname "CN=Android Debug,O=Android,C=US"
+            echo "Created the Loadout debug signing key; Actions cache will retain it for later builds."
+          else
+            echo "Restored the existing Loadout debug signing key."
+          fi
+          chmod 600 "$HOME/.android/debug.keystore"
+
       - name: Set up Android SDK
+        if: steps.detect.outputs.mode != 'skip'
         uses: android-actions/setup-android@v4
 
       - name: Accept Android SDK licences
+        if: steps.detect.outputs.mode != 'skip'
+        shell: bash
         run: yes | sdkmanager --licenses >/dev/null || true
 
       - name: Install Android build platform
+        if: steps.detect.outputs.mode != 'skip'
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools"
 
-      - name: Restore stable debug signing key (optional)
+      - name: Unpack uploaded ZIP and normalize repository
+        if: steps.detect.outputs.mode == 'import'
+        shell: bash
         env:
-          KEYSTORE_B64: ${{ secrets.LOADOUT_DEBUG_KEYSTORE_B64 }}
+          UPLOAD_PATH: ${{ steps.detect.outputs.upload_path }}
         run: |
-          if [ -n "$KEYSTORE_B64" ]; then
-            mkdir -p "$HOME/.android"
-            printf '%s' "$KEYSTORE_B64" | base64 --decode > "$HOME/.android/debug.keystore"
-            chmod 600 "$HOME/.android/debug.keystore"
-            echo "Stable debug signing key restored."
-          else
-            echo "No LOADOUT_DEBUG_KEYSTORE_B64 secret set; this run will use a temporary runner key."
+          set -euo pipefail
+
+          TMP="$RUNNER_TEMP/loadout-import"
+          rm -rf "$TMP"
+          mkdir -p "$TMP/outer" "$TMP/app"
+
+          # Safely extract ZIP entries: reject path traversal and symbolic links.
+          python3 - "$UPLOAD_PATH" "$TMP/outer" <<'PY'
+          import pathlib, stat, sys, zipfile
+          source, destination = sys.argv[1], pathlib.Path(sys.argv[2])
+          with zipfile.ZipFile(source) as archive:
+              bad = archive.testzip()
+              if bad:
+                  raise SystemExit(f"Corrupt ZIP member: {bad}")
+              total = 0
+              for item in archive.infolist():
+                  name = item.filename
+                  if "\\" in name:
+                      raise SystemExit(f"Backslash ZIP paths are not allowed: {item.filename}")
+                  path = pathlib.PurePosixPath(name)
+                  mode = (item.external_attr >> 16) & 0xFFFF
+                  if path.is_absolute() or ".." in path.parts or (path.parts and path.parts[0].endswith(":")):
+                      raise SystemExit(f"Unsafe ZIP path: {item.filename}")
+                  if stat.S_ISLNK(mode):
+                      raise SystemExit(f"Symbolic links are not allowed in the bundle: {item.filename}")
+                  total += item.file_size
+                  if total > 50 * 1024 * 1024:
+                      raise SystemExit("Bundle expands beyond the 50 MiB safety limit.")
+              archive.extractall(destination)
+          PY
+
+          mapfile -t PLANS < <(find "$TMP/outer" -type f -name BUILD_PLAN.json -print)
+          if [ "${#PLANS[@]}" -ne 1 ]; then
+            echo "Expected exactly one BUILD_PLAN.json in the uploaded outer ZIP."
+            exit 1
           fi
 
-      - name: Unpack uploaded ZIP and normalize repository
+          BUNDLE="$(dirname "${PLANS[0]}")"
+          test -f "$BUNDLE/scripts/build.mjs"
+          test -f "$BUNDLE/payload/loadout-app-payload.zip"
+          test -f "$BUNDLE/payload/SHA256SUMS.txt"
+
+          echo "Checking the application payload checksum..."
+          (cd "$BUNDLE/payload" && sha256sum -c SHA256SUMS.txt)
+
+          # Copy build-side files while preserving this bootstrap workflow.
+          rsync -a \
+            --exclude='.github/' \
+            --exclude='.git/' \
+            --exclude='.build/' \
+            "$BUNDLE/" "$GITHUB_WORKSPACE/"
+
+          # Safely extract the inner app payload.
+          python3 - "$GITHUB_WORKSPACE/payload/loadout-app-payload.zip" "$TMP/app" <<'PY'
+          import pathlib, stat, sys, zipfile
+          source, destination = sys.argv[1], pathlib.Path(sys.argv[2])
+          with zipfile.ZipFile(source) as archive:
+              bad = archive.testzip()
+              if bad:
+                  raise SystemExit(f"Corrupt application ZIP member: {bad}")
+              total = 0
+              for item in archive.infolist():
+                  name = item.filename
+                  if "\\" in name:
+                      raise SystemExit(f"Backslash ZIP paths are not allowed: {item.filename}")
+                  path = pathlib.PurePosixPath(name)
+                  mode = (item.external_attr >> 16) & 0xFFFF
+                  if path.is_absolute() or ".." in path.parts or (path.parts and path.parts[0].endswith(":")):
+                      raise SystemExit(f"Unsafe application ZIP path: {item.filename}")
+                  if stat.S_ISLNK(mode):
+                      raise SystemExit(f"Symbolic links are not allowed: {item.filename}")
+                  total += item.file_size
+                  if total > 50 * 1024 * 1024:
+                      raise SystemExit("Application payload expands beyond the 50 MiB safety limit.")
+              archive.extractall(destination)
+          PY
+
+          APP_SOURCE="$TMP/app/loadout-app"
+          test -f "$APP_SOURCE/package.json"
+          test -f "$APP_SOURCE/capacitor.config.json"
+          test -f "$APP_SOURCE/www/index.html"
+          test -f "$APP_SOURCE/www/app.js"
+
+          # Materialize app source at repository root. Build instructions,
+          # scripts and architecture stay outside Capacitor's www/ web assets.
+          rsync -a \
+            --exclude='.github/' \
+            --exclude='.git/' \
+            --exclude='README.md' \
+            --exclude='.gitignore' \
+            "$APP_SOURCE/" "$GITHUB_WORKSPACE/"
+
+          # Replace outdated manual-unzip and signing-secret instructions
+          # inherited from the original bundle README.
+          python3 - <<'PY'
+          from pathlib import Path
+
+          readme = Path("README.md")
+          if readme.exists():
+              text = readme.read_text(encoding="utf-8")
+
+              def replace_section(document, heading, next_heading, replacement):
+                  start = document.find(heading)
+                  if start < 0:
+                      return document
+                  end = document.find(next_heading, start + len(heading))
+                  if end < 0:
+                      return document
+                  return document[:start] + replacement.strip() + "\n\n" + document[end:]
+
+              text = replace_section(
+                  text,
+                  "## Upload this bundle to GitHub",
+                  "## Keep the signing identity stable (important for preserving app data)",
+                  """## Upload this bundle to GitHub
+
+          1. Commit `.github/workflows/build-apk.yml` to the repository's default branch once.
+          2. Upload the complete `Loadout-GitHub-Build.zip` to the repository and commit it. It can be placed at the root or inside a folder.
+          3. GitHub Actions validates and extracts the bundle, commits the application source, builds the Android APK and publishes a release.
+          4. Download the APK from the Actions artifact or the Latest Android APK link at the top of this README.""",
+              )
+              text = replace_section(
+                  text,
+                  "## Keep the signing identity stable (important for preserving app data)",
+                  "## Do not change these paths without updating BUILD_PLAN.json",
+                  """## Keep the signing identity stable
+
+          The workflow creates a debug signing key on the first build and stores it in GitHub Actions cache. No signing-key secret is required. GitHub's default cache retention is 7 days since last access. If the cache is evicted after a long gap, a later APK may have a different signature and Android may reject it as an in-place update. Back up app data before uninstalling an existing installation.""",
+              )
+              readme.write_text(text.rstrip() + "\n", encoding="utf-8")
+          PY
+
+          rm -f "$UPLOAD_PATH"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Import Loadout application source from build bundle"
+            git push origin "HEAD:${GITHUB_REF}"
+          else
+            echo "The import did not create any repository changes."
+          fi
+
+      - name: Confirm build inputs
+        if: steps.detect.outputs.mode != 'skip'
         shell: bash
         run: |
           set -euo pipefail
-          UPLOAD="Loadout-GitHub-Build.zip"
-          if [ -f "$UPLOAD" ]; then
-            TMP="$RUNNER_TEMP/loadout-import"
-            rm -rf "$TMP"
-            mkdir -p "$TMP/outer" "$TMP/app"
-            unzip -q "$UPLOAD" -d "$TMP/outer"
+          test -f scripts/build.mjs
+          test -f BUILD_PLAN.json
+          test -f payload/loadout-app-payload.zip
+          echo "Build inputs are present."
 
-            PLAN="$(find "$TMP/outer" -maxdepth 4 -name BUILD_PLAN.json -print -quit)"
-            if [ -z "$PLAN" ]; then
-              echo "BUILD_PLAN.json not found. Upload the complete Loadout-GitHub-Build.zip bundle."
-              exit 1
-            fi
-            BUNDLE="$(dirname "$PLAN")"
-            test -f "$BUNDLE/scripts/build.mjs"
-            test -f "$BUNDLE/payload/loadout-app-payload.zip"
-            test -f "$BUNDLE/payload/SHA256SUMS.txt"
-
-            echo "Verifying nested application payload..."
-            (cd "$BUNDLE/payload" && sha256sum -c SHA256SUMS.txt)
-
-            # Unpack the outer build bundle into the repository, but keep this
-            # bootstrap workflow in place. It is the persistent one-ZIP entry point.
-            rsync -a \
-              --exclude='.github/' \
-              --exclude='.git/' \
-              --exclude='.build/' \
-              "$BUNDLE/" "$GITHUB_WORKSPACE/"
-
-            # Also materialize the actual application source at repository root:
-            # www/, package.json, Capacitor config, native source and deep instructions.
-            unzip -q "$GITHUB_WORKSPACE/payload/loadout-app-payload.zip" -d "$TMP/app"
-            APP_SOURCE="$TMP/app/loadout-app"
-            test -f "$APP_SOURCE/package.json"
-            test -f "$APP_SOURCE/capacitor.config.json"
-            test -d "$APP_SOURCE/www"
-            rsync -a \
-              --exclude='.github/' \
-              --exclude='.git/' \
-              --exclude='README.md' \
-              --exclude='.gitignore' \
-              "$APP_SOURCE/" "$GITHUB_WORKSPACE/"
-
-            # Remove the uploaded ZIP only after both layers have been verified
-            # and unpacked. The normalized source + payload remain in the repo.
-            rm -f "$UPLOAD"
-
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A
-            if ! git diff --cached --quiet; then
-              git commit -m "Unpack Loadout build bundle and normalize source"
-              git push origin "HEAD:${GITHUB_REF_NAME}"
-            else
-              echo "Unpack produced no repository changes."
-            fi
-          else
-            echo "No upload ZIP found; building the already-normalized repository."
-          fi
-
-          test -f scripts/build.mjs || { echo "scripts/build.mjs missing"; exit 1; }
-          test -f BUILD_PLAN.json || { echo "BUILD_PLAN.json missing"; exit 1; }
-          test -f payload/loadout-app-payload.zip || { echo "Nested application payload missing"; exit 1; }
-
-      - name: Build debug APK from deep instructions
+      - name: Build Android debug APK
+        if: steps.detect.outputs.mode != 'skip'
         run: node scripts/build.mjs
 
-      - name: Prepare stable release asset name
+      - name: Prepare APK and checksum
+        if: steps.detect.outputs.mode != 'skip'
         shell: bash
         run: |
           set -euo pipefail
-          APK="$(find .build/loadout-app/android/app/build/outputs/apk/debug -maxdepth 1 -name '*.apk' -print -quit)"
+          APK="$(find .build/loadout-app/android/app/build/outputs/apk/debug -maxdepth 1 -type f -name '*.apk' -print -quit)"
           if [ -z "$APK" ]; then
             echo "Gradle finished without producing a debug APK."
             exit 1
           fi
           cp "$APK" Loadout-Android.apk
-          sha256sum Loadout-Android.apk | tee Loadout-Android.apk.sha256
+          sha256sum Loadout-Android.apk > Loadout-Android.apk.sha256
 
-      - name: Publish release and upload latest APK
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: loadout-build-${{ github.run_number }}-${{ github.run_attempt }}
-          name: Loadout Android build ${{ github.run_number }}.${{ github.run_attempt }}
-          body: |
-            Automatically built from the normalized Loadout repository.
-
-            Commit: ${{ github.sha }}
-            Build run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-            Install `Loadout-Android.apk` on the device. This is a debug build.
-          files: |
-            Loadout-Android.apk
-            Loadout-Android.apk.sha256
-          make_latest: true
-          fail_on_unmatched_files: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload APK as workflow artifact too
+      - name: Upload APK as a workflow artifact
+        if: steps.detect.outputs.mode != 'skip'
         uses: actions/upload-artifact@v4
         with:
           name: Loadout-Android-debug-apk
@@ -173,50 +291,68 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Check repository metadata token availability
-        id: metadata-token
-        env:
-          REPO_ADMIN_TOKEN: ${{ secrets.REPO_ADMIN_TOKEN }}
-        run: |
-          if [ -n "$REPO_ADMIN_TOKEN" ]; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-          fi
+      - name: Publish APK as the latest GitHub Release
+        if: steps.detect.outputs.mode != 'skip' && github.ref_name == github.event.repository.default_branch
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ github.token }}
+          tag_name: loadout-build-${{ github.run_number }}-${{ github.run_attempt }}
+          name: Loadout Android build ${{ github.run_number }}.${{ github.run_attempt }}
+          body: |
+            Automatically built from the Loadout repository.
 
-      - name: Update repository description with stable APK download link
-        if: ${{ steps.metadata-token.outputs.available == 'true' }}
-        env:
-          GH_TOKEN: ${{ secrets.REPO_ADMIN_TOKEN }}
-          APK_URL: https://github.com/${{ github.repository }}/releases/latest/download/Loadout-Android.apk
+            Source commit: ${{ github.sha }}
+            Build run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Download and install `Loadout-Android.apk`. This is a debug build.
+          files: |
+            Loadout-Android.apk
+            Loadout-Android.apk.sha256
+          make_latest: true
+          fail_on_unmatched_files: true
+
+      - name: Add the permanent APK download link to README
+        if: steps.detect.outputs.mode != 'skip' && github.ref_name == github.event.repository.default_branch
         shell: bash
+        env:
+          APK_URL: https://github.com/${{ github.repository }}/releases/latest/download/Loadout-Android.apk
         run: |
           set -euo pipefail
-          CURRENT="$(gh api "repos/${GITHUB_REPOSITORY}" --jq '.description // ""')"
-          NEW_DESCRIPTION="$(python - "$CURRENT" "$APK_URL" <<'PY'
-          import re, sys
-          current = sys.argv[1].strip()
-          url = sys.argv[2].strip()
-          current = re.sub(r'\s*[|·-]\s*Latest APK:.*$', '', current, flags=re.I).strip()
-          suffix = f' | Latest APK: {url}'
-          max_len = 350
-          prefix = current[:max(0, max_len - len(suffix))].rstrip()
-          print(prefix + suffix)
-          PY
-          )"
-          gh api --method PATCH "repos/${GITHUB_REPOSITORY}" \
-            -H "Accept: application/vnd.github+json" \
-            -f description="$NEW_DESCRIPTION" \
-            -f homepage="$APK_URL"
-          echo "Repository description and homepage now point to: $APK_URL"
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
 
-      - name: Explain missing repository-description permission
-        if: ${{ steps.metadata-token.outputs.available != 'true' }}
-        run: |
-          echo "::warning::APK release succeeded, but repository description was not changed. Add the REPO_ADMIN_TOKEN Actions secret with fine-grained Administration: write permission for this repository, then run this workflow again."
+          path = Path("README.md")
+          current = path.read_text(encoding="utf-8") if path.exists() else ""
+          start = "<!-- LOADOUT_LATEST_APK_START -->"
+          end = "<!-- LOADOUT_LATEST_APK_END -->"
+          block = (
+              f"{start}\n"
+              "## Latest Android APK\n\n"
+              f"[Download Loadout-Android.apk]({os.environ['APK_URL']})\n"
+              f"{end}"
+          )
+
+          if start in current and end in current:
+              before = current.split(start, 1)[0]
+              after = current.split(end, 1)[1]
+              updated = before + block + after
+          else:
+              updated = block + "\n\n" + current.lstrip()
+
+          path.write_text(updated.rstrip() + "\n", encoding="utf-8")
+          PY
+
+          git add README.md
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Add latest Loadout APK download link"
+            git push origin "HEAD:${GITHUB_REF}"
+          fi
 
       - name: Upload build diagnostics
-        if: always()
+        if: always() && steps.detect.outputs.mode != 'skip'
         uses: actions/upload-artifact@v4
         with:
           name: Loadout-build-diagnostics
@@ -225,4 +361,9 @@ jobs:
             .build/loadout-app/android/build/reports/**
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Explain first-install no-op
+        if: steps.detect.outputs.mode == 'skip'
+        run: |
+          echo "::notice::Workflow is installed. Upload Loadout-GitHub-Build.zip to the repository (any folder) and commit it, or use Actions > this workflow > Run workflow after the source is imported."
           
