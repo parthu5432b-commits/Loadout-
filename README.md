@@ -1,3 +1,9 @@
+<!-- LOADOUT_LATEST_APK_START -->
+## Latest Android APK
+
+[Download Loadout-Android.apk](https://github.com/parthu5432b-commits/Loadout-/releases/latest/download/Loadout-Android.apk)
+<!-- LOADOUT_LATEST_APK_END -->
+
 # Loadout — GitHub APK Build Bundle
 
 This is the **repository root** to upload to your private GitHub repository. Do not upload only the inner payload ZIP.
