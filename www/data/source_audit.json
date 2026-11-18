@@ -1,0 +1,47 @@
+{
+  "source_files": {},
+  "subjects": {
+    "Physics": {
+      "source_chapters": 32,
+      "topics_before_filter": 170,
+      "topics_kept": 145,
+      "topics_excluded": 25,
+      "source_numeric_validation_errors": 0,
+      "fresh_source_comparison_errors_vs_prior_data": 0,
+      "source_text_sections_present_for_every_chapter": true,
+      "active_recent_totals_reconcile": true,
+      "source_validation_errors": [],
+      "cross_validation_errors": []
+    },
+    "Chemistry": {
+      "source_chapters": 28,
+      "topics_before_filter": 170,
+      "topics_kept": 132,
+      "topics_excluded": 38,
+      "source_numeric_validation_errors": 0,
+      "fresh_source_comparison_errors_vs_prior_data": 0,
+      "source_text_sections_present_for_every_chapter": true,
+      "active_recent_totals_reconcile": true,
+      "source_validation_errors": [],
+      "cross_validation_errors": []
+    },
+    "Mathematics": {
+      "source_chapters": 31,
+      "topics_before_filter": 210,
+      "topics_kept": 143,
+      "topics_excluded": 67,
+      "source_numeric_validation_errors": 0,
+      "fresh_source_comparison_errors_vs_prior_data": null,
+      "source_text_sections_present_for_every_chapter": true,
+      "active_recent_totals_reconcile": true,
+      "source_validation_errors": [],
+      "cross_validation_errors": []
+    }
+  },
+  "cross_validation_existing_json": {},
+  "criteria": "Exclude a subtopic from the active database if source Overall/Total O = 0 in both 2024 and 2025. Removed-topic list stores labels and provenance only, not their historical E/M/T/O rows.",
+  "total_excluded_topics": 130,
+  "source_pages": 91,
+  "active_topic_rows": 420,
+  "original_topic_rows": 550
+}

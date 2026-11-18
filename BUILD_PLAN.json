@@ -1,0 +1,24 @@
+{
+  "formatVersion": 1,
+  "payload": "payload/loadout-app-payload.zip",
+  "payloadSha256File": "payload/SHA256SUMS.txt",
+  "workspace": ".build",
+  "instructionFile": "BUILD_INSTRUCTIONS.json",
+  "expectedAppId": "app.loadout.jee",
+  "expectedWebDir": "www",
+  "workflow": {
+    "node": "22",
+    "java": "21",
+    "gradleTask": "assembleDebug"
+  },
+  "artifactGlob": ".build/loadout-app/android/app/build/outputs/apk/debug/*.apk",
+  "excludeFromApk": [
+    ".github",
+    "scripts",
+    "architecture",
+    "BUILD_INSTRUCTIONS.json",
+    "LOADOUT_ARCHITECTURE.md",
+    "README.md",
+    "package.json"
+  ]
+}

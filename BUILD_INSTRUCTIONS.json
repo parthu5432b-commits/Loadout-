@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "app": {
+    "appId": "app.loadout.jee",
+    "appName": "Loadout JEE",
+    "webDir": "www"
+  },
+  "capacitor": {
+    "major": 7,
+    "version": "7.4.3"
+  },
+  "runtime": {
+    "id": "loadout.self-evolving-runtime",
+    "version": "0.1.0",
+    "api": "1.0.0"
+  },
+  "native": {
+    "pluginClass": "LoadoutCorePlugin",
+    "pluginName": "LoadoutCore",
+    "source": "native/android/LoadoutCorePlugin.java",
+    "registerInMainActivity": true,
+    "sourceDir": "native/android"
+  },
+  "webAssets": [
+    "www/index.html",
+    "www/app.js",
+    "www/runtime/loadout-runtime.js",
+    "www/sw.js"
+  ],
+  "safety": {
+    "preserveLegacyLocalStorage": true,
+    "doNotDeleteUserData": true,
+    "manualUpdateDecision": true,
+    "debugPolicy": "balanced"
+  },
+  "build": {
+    "type": "debug-apk",
+    "gradleTask": "assembleDebug",
+    "outputGlob": "android/app/build/outputs/apk/debug/*.apk",
+    "versionName": "1.1.0",
+    "versionCode": 2
+  }
+}

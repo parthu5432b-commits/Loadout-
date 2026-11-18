@@ -1,0 +1,1046 @@
+{
+  "rule": "Exclude a subtopic from the active database if source Overall/Total O = 0 in both 2024 and 2025. Removed-topic list stores labels and provenance only, not their historical E/M/T/O rows.",
+  "count": 130,
+  "topics": [
+    {
+      "subject": "Physics",
+      "chapter_number": 1,
+      "chapter": "Mathematics in Physics",
+      "topic": "Lami's Theorem",
+      "source_pdf_page": 1,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 7,
+      "chapter": "Center of Mass Momentum and Collision",
+      "topic": "Motion of centre of mass",
+      "source_pdf_page": 7,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 11,
+      "chapter": "Mechanical Properties of Fluids",
+      "topic": "Density",
+      "source_pdf_page": 11,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 11,
+      "chapter": "Mechanical Properties of Fluids",
+      "topic": "Efflux of liquid",
+      "source_pdf_page": 11,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 12,
+      "chapter": "Oscillations",
+      "topic": "Angular oscillations",
+      "source_pdf_page": 12,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 13,
+      "chapter": "Waves and Sound",
+      "topic": "Interference and Superposition of Waves",
+      "source_pdf_page": 13,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 13,
+      "chapter": "Waves and Sound",
+      "topic": "Stationary waves",
+      "source_pdf_page": 13,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 13,
+      "chapter": "Waves and Sound",
+      "topic": "Doppler's Effect",
+      "source_pdf_page": 13,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 13,
+      "chapter": "Waves and Sound",
+      "topic": "Properties of Sound Waves",
+      "source_pdf_page": 13,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 14,
+      "chapter": "Thermal Properties of Matter",
+      "topic": "Convection",
+      "source_pdf_page": 14,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 19,
+      "chapter": "Current Electricity",
+      "topic": "Color coding of resistors",
+      "source_pdf_page": 19,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 20,
+      "chapter": "Magnetic Properties of Matter",
+      "topic": "Magnetic Equipments",
+      "source_pdf_page": 20,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 22,
+      "chapter": "Electromagnetic Induction",
+      "topic": "Inductance",
+      "source_pdf_page": 22,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 24,
+      "chapter": "Ray Optics",
+      "topic": "Optical Instruments",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 24,
+      "chapter": "Ray Optics",
+      "topic": "Human eye",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 25,
+      "chapter": "Wave Optics",
+      "topic": "Special Cases in YDSE",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 26,
+      "chapter": "Dual Nature of Matter",
+      "topic": "Cathode Rays and Positive Rays",
+      "source_pdf_page": 26,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 26,
+      "chapter": "Dual Nature of Matter",
+      "topic": "Davison and Germer Experiment",
+      "source_pdf_page": 26,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 27,
+      "chapter": "Atomic Physics",
+      "topic": "Thomson Atomic Model",
+      "source_pdf_page": 27,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 29,
+      "chapter": "Electromagnetic Waves",
+      "topic": "X-Rays",
+      "source_pdf_page": 29,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 30,
+      "chapter": "Semiconductors",
+      "topic": "Rectifier",
+      "source_pdf_page": 30,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 30,
+      "chapter": "Semiconductors",
+      "topic": "Junction Transistors",
+      "source_pdf_page": 30,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 31,
+      "chapter": "Communication System",
+      "topic": "Communication System",
+      "source_pdf_page": 31,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 31,
+      "chapter": "Communication System",
+      "topic": "Propagation of EM Waves",
+      "source_pdf_page": 31,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Physics",
+      "chapter_number": 31,
+      "chapter": "Communication System",
+      "topic": "Modulation",
+      "source_pdf_page": 31,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 1,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "topic": "Laws of chemical combination",
+      "source_pdf_page": 1,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 1,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "topic": "Significant Figures",
+      "source_pdf_page": 1,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 3,
+      "chapter": "States of Matter",
+      "topic": "Gas laws and Ideal Gas Equation",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 3,
+      "chapter": "States of Matter",
+      "topic": "Kinetic theory of gases",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 3,
+      "chapter": "States of Matter",
+      "topic": "Real Gases and Van der Waal's Equation",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 3,
+      "chapter": "States of Matter",
+      "topic": "Critical phenomena and liquefaction",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 3,
+      "chapter": "States of Matter",
+      "topic": "Liquid State",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 4,
+      "chapter": "Thermodynamics (C)",
+      "topic": "Carnot engine",
+      "source_pdf_page": 4,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 6,
+      "chapter": "Ionic Equilibrium",
+      "topic": "Salt Hydrolysis",
+      "source_pdf_page": 6,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 6,
+      "chapter": "Ionic Equilibrium",
+      "topic": "Indicators",
+      "source_pdf_page": 6,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 11,
+      "chapter": "Chemical Kinetics",
+      "topic": "Radioactivity",
+      "source_pdf_page": 10,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 14,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "topic": "Characteristics of covalent compound",
+      "source_pdf_page": 12,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 21,
+      "chapter": "Coordination Compounds",
+      "topic": "Stability of complex ion",
+      "source_pdf_page": 16,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 22,
+      "chapter": "Practical Chemistry",
+      "topic": "Identification of Acid Radicals",
+      "source_pdf_page": 17,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 23,
+      "chapter": "General Organic Chemistry",
+      "topic": "Bond Cleavage",
+      "source_pdf_page": 18,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 24,
+      "chapter": "Hydrocarbons",
+      "topic": "Properties and Preparation of Alkynes",
+      "source_pdf_page": 19,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 24,
+      "chapter": "Hydrocarbons",
+      "topic": "Preparation and Properties of Benzene",
+      "source_pdf_page": 19,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 25,
+      "chapter": "Environmental Chemistry",
+      "topic": "Environmental Pollution and pollutants",
+      "source_pdf_page": 20,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 25,
+      "chapter": "Environmental Chemistry",
+      "topic": "Air Pollution",
+      "source_pdf_page": 20,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 25,
+      "chapter": "Environmental Chemistry",
+      "topic": "Water Pollution",
+      "source_pdf_page": 20,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 25,
+      "chapter": "Environmental Chemistry",
+      "topic": "Land Pollution",
+      "source_pdf_page": 20,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 25,
+      "chapter": "Environmental Chemistry",
+      "topic": "Control of environmental pollution",
+      "source_pdf_page": 20,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 26,
+      "chapter": "Haloalkanes and Haloarenes",
+      "topic": "Grignard Reagent",
+      "source_pdf_page": 21,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 27,
+      "chapter": "Alcohols Phenols and Ethers",
+      "topic": "Preparation of Oxiranes",
+      "source_pdf_page": 22,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 27,
+      "chapter": "Alcohols Phenols and Ethers",
+      "topic": "Reactions of Oxiranes",
+      "source_pdf_page": 22,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 27,
+      "chapter": "Alcohols Phenols and Ethers",
+      "topic": "Dihydric alcohols",
+      "source_pdf_page": 22,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 27,
+      "chapter": "Alcohols Phenols and Ethers",
+      "topic": "Preparation and Reactions of Glycol",
+      "source_pdf_page": 22,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 28,
+      "chapter": "Aldehydes and Ketones",
+      "topic": "Method of preparation for Ketones",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 28,
+      "chapter": "Aldehydes and Ketones",
+      "topic": "Reactions for ketones",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 29,
+      "chapter": "Carboxylic Acid Derivatives",
+      "topic": "Abnormal Behaviour of Formic Acid",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 29,
+      "chapter": "Carboxylic Acid Derivatives",
+      "topic": "Preparation and Properties of Esters",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 30,
+      "chapter": "Amines",
+      "topic": "Preparation and Properties of Amides",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 31,
+      "chapter": "Biomolecules",
+      "topic": "Fats",
+      "source_pdf_page": 26,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 32,
+      "chapter": "Polymers",
+      "topic": "Classification of Polymers",
+      "source_pdf_page": 27,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 32,
+      "chapter": "Polymers",
+      "topic": "Preparation and Properties of Polymers",
+      "source_pdf_page": 27,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 33,
+      "chapter": "Chemistry in Everyday Life",
+      "topic": "Cleansing Agents",
+      "source_pdf_page": 28,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 33,
+      "chapter": "Chemistry in Everyday Life",
+      "topic": "Enzymes and Receptors",
+      "source_pdf_page": 28,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Chemistry",
+      "chapter_number": 33,
+      "chapter": "Chemistry in Everyday Life",
+      "topic": "Artificial Sweetning Agents and Food Preservatives",
+      "source_pdf_page": 28,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 1,
+      "chapter": "Basic of Mathematics",
+      "topic": "Inequalities",
+      "source_pdf_page": 1,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 2,
+      "chapter": "Quadratic Equation",
+      "topic": "Range of Quadratic Function",
+      "source_pdf_page": 2,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 3,
+      "chapter": "Complex Number",
+      "topic": "Power of iota",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 3,
+      "chapter": "Complex Number",
+      "topic": "Rotation Theorem",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 3,
+      "chapter": "Complex Number",
+      "topic": "nth roots of unity",
+      "source_pdf_page": 3,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 4,
+      "chapter": "Sequences and Series",
+      "topic": "Means",
+      "source_pdf_page": 4,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 5,
+      "chapter": "Permutation Combination",
+      "topic": "Summation of Numbers",
+      "source_pdf_page": 5,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 5,
+      "chapter": "Permutation Combination",
+      "topic": "Circular Permutation",
+      "source_pdf_page": 5,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 5,
+      "chapter": "Permutation Combination",
+      "topic": "Dearrangement",
+      "source_pdf_page": 5,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 6,
+      "chapter": "Binomial Theorem",
+      "topic": "Comparison between two numbers",
+      "source_pdf_page": 6,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 6,
+      "chapter": "Binomial Theorem",
+      "topic": "Series involving Product of Coefficients",
+      "source_pdf_page": 6,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 6,
+      "chapter": "Binomial Theorem",
+      "topic": "Binomial Theorem for Negative Index",
+      "source_pdf_page": 6,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 7,
+      "chapter": "Mathematical Reasoning",
+      "topic": "Mathematical Reasoning",
+      "source_pdf_page": 7,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 8,
+      "chapter": "Statistics",
+      "topic": "Mean",
+      "source_pdf_page": 8,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 8,
+      "chapter": "Statistics",
+      "topic": "Mean Square Deviation",
+      "source_pdf_page": 8,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 9,
+      "chapter": "Matrices",
+      "topic": "Symmetric & Skew Symmetric Matrices",
+      "source_pdf_page": 9,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 10,
+      "chapter": "Determinants",
+      "topic": "Summation of Determinants",
+      "source_pdf_page": 10,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 10,
+      "chapter": "Determinants",
+      "topic": "Miscellaneous",
+      "source_pdf_page": 10,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 11,
+      "chapter": "Probability",
+      "topic": "Bernoulli Trial and Binomial Distribution",
+      "source_pdf_page": 11,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 11,
+      "chapter": "Probability",
+      "topic": "Geometric Probability",
+      "source_pdf_page": 11,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 13,
+      "chapter": "Functions",
+      "topic": "Odd and Even Functions",
+      "source_pdf_page": 13,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 13,
+      "chapter": "Functions",
+      "topic": "Periodicity",
+      "source_pdf_page": 13,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 13,
+      "chapter": "Functions",
+      "topic": "Inverse of a Function",
+      "source_pdf_page": 13,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 16,
+      "chapter": "Differentiation",
+      "topic": "Differentiation of implicit functions",
+      "source_pdf_page": 16,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 16,
+      "chapter": "Differentiation",
+      "topic": "Parametric differentiation",
+      "source_pdf_page": 16,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 16,
+      "chapter": "Differentiation",
+      "topic": "Derivative of f(x) wrt g(x)",
+      "source_pdf_page": 16,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 16,
+      "chapter": "Differentiation",
+      "topic": "Differentiation of Inverse Trigonometric Functions",
+      "source_pdf_page": 16,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 16,
+      "chapter": "Differentiation",
+      "topic": "Derivative of function and its inverse",
+      "source_pdf_page": 16,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 18,
+      "chapter": "Indefinite Integration",
+      "topic": "Fundamental of Indefinite Integration",
+      "source_pdf_page": 18,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 19,
+      "chapter": "Definite Integration",
+      "topic": "Basic Definite Integrals",
+      "source_pdf_page": 19,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 19,
+      "chapter": "Definite Integration",
+      "topic": "Properties of Periodic Functions",
+      "source_pdf_page": 19,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 19,
+      "chapter": "Definite Integration",
+      "topic": "Properties Involving Inequalities",
+      "source_pdf_page": 19,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 21,
+      "chapter": "Differential Equations",
+      "topic": "Order and Degree",
+      "source_pdf_page": 21,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 22,
+      "chapter": "Straight Lines",
+      "topic": "Derived Forms of Line",
+      "source_pdf_page": 22,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 22,
+      "chapter": "Straight Lines",
+      "topic": "Pair of Lines",
+      "source_pdf_page": 22,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 23,
+      "chapter": "Circle",
+      "topic": "General Equation of 2nd degree curve",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 23,
+      "chapter": "Circle",
+      "topic": "Tangent to circle",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 23,
+      "chapter": "Circle",
+      "topic": "Pair of Tangents",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 23,
+      "chapter": "Circle",
+      "topic": "Chord of Contact",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 23,
+      "chapter": "Circle",
+      "topic": "Family of Circle",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 23,
+      "chapter": "Circle",
+      "topic": "Locus",
+      "source_pdf_page": 23,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 24,
+      "chapter": "Parabola",
+      "topic": "Line and parabola",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 24,
+      "chapter": "Parabola",
+      "topic": "Pair of Tangents",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 24,
+      "chapter": "Parabola",
+      "topic": "Properties of Tangent",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 24,
+      "chapter": "Parabola",
+      "topic": "Common Tangent",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 24,
+      "chapter": "Parabola",
+      "topic": "Normal to Parabola",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 24,
+      "chapter": "Parabola",
+      "topic": "Locus",
+      "source_pdf_page": 24,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Position of point",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Auxillary Circle",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Chord of ellipse",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Pair of Tangents",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Common Tangent",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Normal to ellipse",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Chord of Contact",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Locus",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 25,
+      "chapter": "Ellipse",
+      "topic": "Reflection property",
+      "source_pdf_page": 25,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 26,
+      "chapter": "Hyperbola",
+      "topic": "Common Tangent",
+      "source_pdf_page": 26,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 26,
+      "chapter": "Hyperbola",
+      "topic": "Normal to hyperbola",
+      "source_pdf_page": 26,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 26,
+      "chapter": "Hyperbola",
+      "topic": "Chord with given Middle Point",
+      "source_pdf_page": 26,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 26,
+      "chapter": "Hyperbola",
+      "topic": "Rectangular hyperbola",
+      "source_pdf_page": 26,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 27,
+      "chapter": "Trigonometric Ratios & Identities",
+      "topic": "Maximum and Minimum Values",
+      "source_pdf_page": 27,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 27,
+      "chapter": "Trigonometric Ratios & Identities",
+      "topic": "Trigonometric Series",
+      "source_pdf_page": 27,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 28,
+      "chapter": "Trigonometric Equations",
+      "topic": "Solving Trigonometric Inequalities",
+      "source_pdf_page": 28,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 29,
+      "chapter": "Inverse Trigonometric Functions",
+      "topic": "Sum of complementary angles",
+      "source_pdf_page": 29,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 32,
+      "chapter": "Vector Algebra",
+      "topic": "Vector Triple Product",
+      "source_pdf_page": 30,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 33,
+      "chapter": "Three Dimensional Geometry",
+      "topic": "Plane in Space",
+      "source_pdf_page": 31,
+      "reason": "O = 0 in both 2024 and 2025"
+    },
+    {
+      "subject": "Mathematics",
+      "chapter_number": 33,
+      "chapter": "Three Dimensional Geometry",
+      "topic": "Line and Plane",
+      "source_pdf_page": 31,
+      "reason": "O = 0 in both 2024 and 2025"
+    }
+  ]
+}

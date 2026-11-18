@@ -1,0 +1,11 @@
+{
+  "appId": "app.loadout.jee",
+  "appName": "Loadout JEE",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

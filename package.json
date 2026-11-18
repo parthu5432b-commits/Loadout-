@@ -1,0 +1,19 @@
+{
+  "name": "loadout-jee",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Loadout JEE 2027 with native runtime, transactional update foundations and managed storage.",
+  "scripts": {
+    "build:web": "node -e \"console.log('Static www/ \u2014 no bundler step')\"",
+    "sync": "npx cap sync android",
+    "open:android": "npx cap open android",
+    "build:apk": "cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "7.4.3",
+    "@capacitor/core": "7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "7.4.3"
+  }
+}
